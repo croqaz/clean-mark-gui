@@ -5,21 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🏹 Clean mark</title>
   <link rel="stylesheet" href="https://unpkg.com/ace-css/css/ace.min.css">
+  <style>
+    .input, .textarea {
+      border-color:#0074d9;
+    }
+    button.btn {
+      height:2.5rem;
+      width:99%;
+    }
+  </style>
 </head>
-<body class="bg-darken-1">
+<body style="background-color:#FFF8DC">
 <main class="clearfix m0 p2">
-  <div class="max-width-3 mx-auto">
+  <div id="page1" class="max-width-3 mx-auto">
     <h1 class="h1">🏹 Clean mark</h1>
-    <p class="regular">Type the URL and click the magical button</h1>
+    <p class="regular">Type the URL, click the magical button and hope for the best</h1>
     <div class="clearfix py1">
       <div class="col col-10">
         <input id="link" class="input bg-white" type="text" placeholder="http://.../" />
       </div>
-      <div class="col col-2 pl2">
-        <button id="start" class="btn btn-outline blue bg-white" style="height:2.5rem;width:99%;">Fetch</button>
+      <div class="col col-2 pl1">
+        <button onclick="cleanMark()" class="btn btn-outline blue bg-white">
+          🎯 &nbsp;Shoot</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="page2" class="max-width-3 mx-auto display-none">
+    <textarea id="result" class="textarea" rows="26">Asd ...</textarea>
+    <div class="clearfix">
+      <div class="col col-2">
+      <button onclick="goHome()" class="btn btn-outline blue bg-white">
+        🔙 &nbsp;Back</button>
       </div>
     </div>
   </div>
 </main>
+<script>
+const c = require('clean-mark')
+function goHome () {
+  // Show page1, hide all others
+  document.getElementById('page1').classList.remove('display-none')
+  document.getElementById('page2').classList.add('display-none')
+}
+function cleanMark () {
+  console.log('☟  watch dis ...')
+  const link = document.getElementById('link').value
+  c(link).then(dict => {
+    // Hide page1, show page2
+    document.getElementById('page1').classList.add('display-none')
+    document.getElementById('page2').classList.remove('display-none')
+    // Push the text
+    const text = `---\ntitle: ${dict.title}\nauthor: ${dict.author}\ndate: ${dict.date}\npublisher: ${dict.publisher}\nlink: ${dict.url}\n---\n${dict.text}`
+    // console.log(text)
+    document.getElementById('result').value = text
+    console.log('☞  baaam!')
+  }).catch(err => console.error(err))
+}
+</script>
 </body>
 </html>

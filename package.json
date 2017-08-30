@@ -1,0 +1,33 @@
+{
+  "authors": [
+    "Cristi Constantin <cristi.constantin@live.com>"
+  ],
+  "dependencies": {
+    "clean-mark": "0.x"
+  },
+  "description": "Convert an article into a clean Markdown",
+  "devDependencies": {
+    "expect.js": "0.x",
+    "mocha": "3.x",
+    "should": "11.x",
+    "standard": "10.x"
+  },
+  "engines": {
+    "node": ">8.0.0"
+  },
+  "keywords": [
+    "gui",
+    "clearly",
+    "readability",
+    "markdown"
+  ],
+  "license": "MPL",
+  "main": "lib/clean.js",
+  "name": "clean-mark-gui",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/croqaz/clean-mark-gui.git"
+  },
+  "version": "0.1.0"
+}

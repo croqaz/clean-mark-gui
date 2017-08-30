@@ -3,7 +3,8 @@
     "Cristi Constantin <cristi.constantin@live.com>"
   ],
   "dependencies": {
-    "clean-mark": "0.x"
+    "clean-mark": "0.x",
+    "electron": "1.x"
   },
   "description": "Convert an article into a clean Markdown",
   "devDependencies": {
@@ -22,7 +23,7 @@
     "markdown"
   ],
   "license": "MPL",
-  "main": "lib/clean.js",
+  "main": "electron.js",
   "name": "clean-mark-gui",
   "private": true,
   "repository": {

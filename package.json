@@ -4,7 +4,8 @@
   ],
   "dependencies": {
     "clean-mark": "0.x",
-    "electron": "1.x"
+    "electron": "1.x",
+    "electron-packager": "9.x"
   },
   "description": "Convert an article into a clean Markdown",
   "devDependencies": {
@@ -29,6 +30,10 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/croqaz/clean-mark-gui.git"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/electron-packager . --out=dist --asar --overwrite --platform=darwin",
+    "start": "./node_modules/.bin/electron ."
   },
   "version": "0.1.0"
 }

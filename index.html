@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🏹 Clean mark</title>
   <link rel="stylesheet" href="https://unpkg.com/ace-css/css/ace.min.css">
+  <link rel="stylesheet" href="simplemde/latest/simplemde.min.css">
   <style>
     .input, .textarea {
       border-color:#0074d9;
@@ -20,7 +21,7 @@
   <div id="page1" class="max-width-3 mx-auto">
     <h1 class="h1">🏹 Clean mark</h1>
     <p class="regular">Type the URL, click the magical button and hope for the best</h1>
-    <div class="clearfix py1">
+    <div class="clearfix pt1">
       <div class="col col-10">
         <input id="link" class="input bg-white" type="text" placeholder="http://.../" />
       </div>
@@ -29,11 +30,14 @@
           🎯 &nbsp;Shoot</button>
       </div>
     </div>
+    <div class="clearfix">
+      <p id="errors" class="regular red"></p>
+    </div>
   </div>
 
   <div id="page2" class="max-width-3 mx-auto display-none">
-    <textarea id="result" class="textarea" rows="26">Asd ...</textarea>
-    <div class="clearfix">
+    <textarea id="editor"></textarea>
+    <div class="clearfix" style="margin-top:-1em">
       <div class="col col-2">
       <button onclick="goHome()" class="btn btn-outline blue bg-white">
         🔙 &nbsp;Back</button>
@@ -41,26 +45,36 @@
     </div>
   </div>
 </main>
+
+<script src="simplemde/latest/simplemde.min.js"></script>
 <script>
 const c = require('clean-mark')
+const mde = new SimpleMDE({
+  autofocus: true,
+  spellChecker: false,
+  element: document.getElementById('editor')
+})
 function goHome () {
   // Show page1, hide all others
   document.getElementById('page1').classList.remove('display-none')
   document.getElementById('page2').classList.add('display-none')
 }
 function cleanMark () {
-  console.log('☟  watch dis ...')
+  console.log('Starting ...')
+  const errs = document.getElementById('errors')
   const link = document.getElementById('link').value
   c(link).then(dict => {
+    errs.innerText = ''
     // Hide page1, show page2
     document.getElementById('page1').classList.add('display-none')
     document.getElementById('page2').classList.remove('display-none')
     // Push the text
-    const text = `---\ntitle: ${dict.title}\nauthor: ${dict.author}\ndate: ${dict.date}\npublisher: ${dict.publisher}\nlink: ${dict.url}\n---\n${dict.text}`
-    // console.log(text)
-    document.getElementById('result').value = text
-    console.log('☞  baaam!')
-  }).catch(err => console.error(err))
+    const text = `\`\`\`\ntitle: ${dict.title}\nauthor: ${dict.author}\ndate: ${dict.date}\npublisher: ${dict.publisher}\nlink: ${dict.url}\n\`\`\`\n\n${dict.text}`
+    mde.value(text)
+  }).catch(err => {
+    console.error(err)
+    errs.innerText = err
+  })
 }
 </script>
 </body>

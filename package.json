@@ -2,6 +2,9 @@
   "authors": [
     "Cristi Constantin <cristi.constantin@live.com>"
   ],
+  "bugs": {
+    "url": "https://github.com/croqaz/clean-mark-gui/issues"
+  },
   "dependencies": {
     "clean-mark": "0.x",
     "electron": "1.x",
@@ -29,7 +32,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/croqaz/clean-mark-gui.git"
+    "url": "git+https://github.com/croqaz/clean-mark-gui.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/electron-packager . --out=dist --asar --overwrite --platform=darwin",

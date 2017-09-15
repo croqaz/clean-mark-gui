@@ -6,6 +6,7 @@
     "url": "https://github.com/croqaz/clean-mark-gui/issues"
   },
   "dependencies": {
+    "a-extractor": "1.x",
     "clean-mark": "0.x",
     "electron": "1.x",
     "electron-packager": "9.x"
@@ -18,7 +19,7 @@
     "standard": "10.x"
   },
   "engines": {
-    "node": ">8.0.0"
+    "node": ">6.0.0"
   },
   "keywords": [
     "gui",

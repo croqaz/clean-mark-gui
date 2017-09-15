@@ -49,6 +49,7 @@
 <script src="simplemde/latest/simplemde.min.js"></script>
 <script>
 const c = require('clean-mark')
+const s = require('clean-mark/lib/stats')
 const mde = new SimpleMDE({
   autofocus: true,
   spellChecker: false,
@@ -69,7 +70,8 @@ function cleanMark () {
     document.getElementById('page1').classList.add('display-none')
     document.getElementById('page2').classList.remove('display-none')
     // Push the text
-    const text = `\`\`\`\ntitle: ${dict.title}\nauthor: ${dict.author}\ndate: ${dict.date}\npublisher: ${dict.publisher}\nlink: ${dict.url}\n\`\`\`\n\n${dict.text}`
+    const stat = `paragraph=${s.paragraphCount(dict.text)} sentences=${s.sentenceCount(dict.text)}, words=${s.wordCount(dict.text)}`
+    const text = `\`\`\`\nlink: ${dict.url}\ntitle: ${dict.title}\nkeywords: ${dict.keywords}\nauthor: ${dict.author}\ndate: ${dict.date}\npublisher: ${dict.publisher}\nstats: ${stat}\n\`\`\`\n${dict.text}`
     mde.value(text)
   }).catch(err => {
     console.error(err)
